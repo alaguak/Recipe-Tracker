@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Recipe</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 600px;
+            margin: auto;
+            background: yellow;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type=text] {
+            width: 85%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        textarea {
+            width: 85%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+
+        .ingredient-row {
+            margin-top: 8px;
+        }
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .add-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+            width: 100%;
+            background: #3498db;
+            color: white;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Add Recipe</h1>
+
+        <form action="/save" method="POST">
+
+            <label>Recipe Name</label>
+            <input type="text"
+                   name="rname"
+                   placeholder="e.g., Spaghetti Carbonara"
+                   required>
+
+            <label>Ingredients</label>
+
+            <div id="ingGroup">
+
+                <div class="ingredient-row">
+                    <input type="text"
+                           name="iname"
+                           placeholder="e.g., 2 cups flour">
+
+                    <button type="button"
+                            class="add-btn"
+                            onclick="addInput()">
+                        +
+                    </button>
+                </div>
+
+            </div>
+
+            <label>Steps</label>
+            <textarea id="steps"
+                      name="steps"
+                      rows="6"
+                      placeholder="e.g., Step 1: Preheat oven to 350°F&#10;Step 2: Mix ingredients in a bowl&#10;Step 3: Bake for 30 minutes"></textarea>
+
+            <button type="submit" class="submit-btn">
+                Save Recipe
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+
+        function addInput() {
+
+            const group = document.getElementById("ingGroup");
+
+            const div = document.createElement("div");
+
+            div.className = "ingredient-row";
+
+            div.innerHTML = `
+            <input type="text"
+                   name="iname"
+                   placeholder="e.g., 1 egg">
+
+            <button type="button"
+                    class="remove-btn"
+                    onclick="removeInput(this)">
+                -
+            </button>
+        `;
+
+            group.appendChild(div);
+        }
+
+        function removeInput(button) {
+            button.parentElement.remove();
+        }
+
+    </script>
+
+</body>
+
+</html>
